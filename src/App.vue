@@ -1,14 +1,22 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="">
+    <div class="container mx-auto">
+      <div id="nav" class="flex flex-row">
+        <router-link to="/" class="p-2">Профиль</router-link>
+        <router-link to="/news" class="p-2">Новости</router-link>
+        <router-link to="/logout" class="p-2">Выход</router-link>
+      </div>
+      <div class="">
+        <router-view/>
+      </div>
     </div>
-    <router-view/>
   </div>
 </template>
 
 <style lang="less">
+  body{
+    background-color: lightgrey;
+  }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

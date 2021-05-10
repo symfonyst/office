@@ -20,7 +20,7 @@
 
 <script>
 import {CHECK_AUTH} from "../store/actions.types";
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 export default {
     name: "Login",
     data(){
@@ -30,17 +30,15 @@ export default {
       }
     },
   computed:{
-      ...mapState({
-        status: 'status'
-      })
+      ...mapGetters(['authStatus']),
   },
     methods:{
       submit(){
-        const {username, password, status} = this
+        const {username, password, authStatus} = this
         const $this = this
         this.$store.dispatch(CHECK_AUTH, {username, password}).then(()=>{
           console.log(status)
-          if(status === 'success'){
+          if(authStatus === 'success'){
             $this.$router.push('/')
           }
         })

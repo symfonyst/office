@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
-import {AUTH_ERROR, AUTH_REQUEST, AUTH_LOGOUT, AUTH_SUCCESS} from "./mutations.types";
-import {CHECK_AUTH} from "./actions.types";
+import {AUTH_ERROR, AUTH_REQUEST, SET_AUTH_LOGOUT, AUTH_SUCCESS} from "./mutations.types";
+import {AUTH_LOGOUT, CHECK_AUTH} from "./actions.types";
 import {API_URL} from '../common/config'
 
 Vue.use(Vuex)
@@ -26,9 +26,13 @@ export default new Vuex.Store({
       state.status = err
       state.hasLoadedOnce = true
     },
-    [AUTH_LOGOUT]: (state) => {
+    [SET_AUTH_LOGOUT]: (state) => {
       state.token = ''
     }
+  },
+  getters: {
+    isAuthenticated: state => !!state.token,
+    authStatus: state => state.status,
   },
   actions: {
     [CHECK_AUTH]({commit}, params) {
@@ -49,6 +53,10 @@ export default new Vuex.Store({
       }).catch((err) => {
         commit(AUTH_ERROR, err)
       })
+    },
+    [AUTH_LOGOUT]({commit}){
+      commit(SET_AUTH_LOGOUT)
+      localStorage.removeItem('user-token')
     }
   },
   modules: {}

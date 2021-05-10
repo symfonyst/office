@@ -1,17 +1,26 @@
 <template>
   <div id="app" class="">
     <div class="container mx-auto">
-      <div id="nav" class="flex flex-row">
-        <router-link to="/" class="p-2">Профиль</router-link>
-        <router-link to="/news" class="p-2">Новости</router-link>
-        <router-link to="/logout" class="p-2">Выход</router-link>
-      </div>
+      <app-menu v-if="isAuthenticated" />
       <div class="">
         <router-view/>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+  import {mapGetters} from 'vuex'
+  import Menu from "./components/Menu";
+  export default {
+    components:{
+      'app-menu': Menu
+    },
+    computed:{
+      ...mapGetters(['isAuthenticated'])
+    }
+  }
+</script>
 
 <style lang="less">
   body{

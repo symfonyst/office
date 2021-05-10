@@ -37,9 +37,7 @@ export default new Vuex.Store({
   actions: {
     [CHECK_AUTH]({commit}, params) {
       const path = API_URL + '/api/login_check'
-      console.log(params)
       commit(AUTH_REQUEST)
-      console.log(path)
       return Axios({
         method: "POST",
         url: path,

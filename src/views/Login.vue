@@ -37,7 +37,6 @@ export default {
         const {username, password, authStatus} = this
         const $this = this
         this.$store.dispatch(CHECK_AUTH, {username, password}).then(()=>{
-          console.log(status)
           if(authStatus === 'success'){
             $this.$router.push('/')
           }
